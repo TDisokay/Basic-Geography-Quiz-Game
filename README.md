@@ -39,6 +39,7 @@ Quick response format
 🗺️ Geographic Regions
 
 🌎 World
+
 🌎 Americas
 
 🌍 Europe
