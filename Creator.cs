@@ -106,7 +106,7 @@ namespace Game_WFDemo_1202
         }
 
         private bool ValidateInput()
-        {
+        {   
             if (string.IsNullOrWhiteSpace(questionTextBox.Text))
             {
                 MessageBox.Show("Please enter a question.");

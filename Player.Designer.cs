@@ -35,6 +35,8 @@ namespace Game_WFDemo_1202
             this.restartButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.reviewPanel = new System.Windows.Forms.Panel();
+            this.reviewGridView = new System.Windows.Forms.DataGridView();
+            this.backToResultsButton = new System.Windows.Forms.Button();
             this.reviewListBox = new System.Windows.Forms.ListBox();
             this.questionPanel.SuspendLayout();
             this.multipleChoicePanel.SuspendLayout();
@@ -200,12 +202,41 @@ namespace Game_WFDemo_1202
             // 
             // reviewPanel
             // 
-            this.reviewPanel.Controls.Add(this.reviewListBox);
+            this.reviewPanel.Controls.Add(this.reviewGridView);
+            this.reviewPanel.Controls.Add(this.backToResultsButton);
             this.reviewPanel.Location = new System.Drawing.Point(20, 20);
             this.reviewPanel.Name = "reviewPanel";
             this.reviewPanel.Size = new System.Drawing.Size(760, 520);
             this.reviewPanel.TabIndex = 2;
             this.reviewPanel.Visible = false;
+            //
+            //  reviewGridView
+            //
+            this.reviewGridView.AllowUserToAddRows = false;
+            this.reviewGridView.AllowUserToDeleteRows = false;
+            this.reviewGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            this.reviewGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.reviewGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.reviewGridView.Location = new System.Drawing.Point(10, 10);
+            this.reviewGridView.Name = "reviewGridView";
+            this.reviewGridView.ReadOnly = true;
+            this.reviewGridView.Size = new System.Drawing.Size(740, 440);
+            this.reviewGridView.TabIndex = 0;
+            this.reviewGridView.Font = new System.Drawing.Font("Nirmala UI", 11F);
+            this.reviewGridView.MultiSelect = false;
+            this.reviewGridView.RowHeadersVisible = false;
+            //
+            //  backToResultsButton
+            //
+            this.backToResultsButton.BackColor = System.Drawing.Color.Turquoise;
+            this.backToResultsButton.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.backToResultsButton.Location = new System.Drawing.Point(10, 460);
+            this.backToResultsButton.Name = "backToResultsButton";
+            this.backToResultsButton.Size = new System.Drawing.Size(740, 40);
+            this.backToResultsButton.TabIndex = 1;
+            this.backToResultsButton.Text = "Back to Results";
+            this.backToResultsButton.UseVisualStyleBackColor = false;
+            this.backToResultsButton.Click += new System.EventHandler(this.backToResultsButton_Click);
             // 
             // reviewListBox
             // 
@@ -253,6 +284,8 @@ namespace Game_WFDemo_1202
         private System.Windows.Forms.Button reviewAnswersButton;
         private System.Windows.Forms.Button restartButton;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.DataGridView reviewGridView;
+        private System.Windows.Forms.Button backToResultsButton;
         private System.Windows.Forms.ListBox reviewListBox;
     }
 }

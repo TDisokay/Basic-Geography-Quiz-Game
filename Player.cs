@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Linq;
+using System.Drawing;
 
 namespace Game_WFDemo_1202
 {
@@ -178,26 +179,39 @@ namespace Game_WFDemo_1202
 
         private void DisplayReview()
         {
-            reviewListBox.Items.Clear();
+            reviewGridView.Columns.Clear();
+            reviewGridView.Columns.Add("Question", "Question");
+            reviewGridView.Columns.Add("YourAnswer", "Your Answer");
+            reviewGridView.Columns.Add("CorrectAnswer", "Correct Answer");
+            reviewGridView.Columns.Add("Result", "Result");
+            reviewGridView.Columns.Add("Points", "Points");
+
+            reviewGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            reviewGridView.Rows.Clear();
             foreach (var result in gameResults)
             {
-                string reviewText = String.Format(
-                    "Question: {0}\n" +
-                    "Your answer: {1}\n" +
-                    "Correct answer: {2}\n" +
-                    "Result: {3}\n" +
-                    "Points: {4}\n" +
-                    "{5}",
+                reviewGridView.Rows.Add(
                     result.Question.QuestionText,
                     result.UserAnswer,
                     result.Question.GetCorrectAnswer(),
                     result.Correct ? "Correct" : "Incorrect",
-                    result.Correct ? result.Question.Points : 0,
-                    new string('-', 75)
+                    result.Correct ? result.Question.Points.ToString() : "0"
                 );
-                reviewText = reviewText.Replace("\n", "\n    ");
-                reviewListBox.Items.Add(reviewText);
             }
+
+            foreach (DataGridViewRow row in reviewGridView.Rows)
+            {
+                row.DefaultCellStyle.BackColor = (bool)row.Cells["Result"].Value.Equals("Correct")
+                    ? Color.LightGreen
+                    : Color.MistyRose;
+            }
+        }
+
+        private void backToResultsButton_Click(object sender, EventArgs e)
+        {
+            reviewPanel.Visible = false;
+            resultPanel.Visible = true;
         }
 
         private void restartButton_Click(object sender, EventArgs e)

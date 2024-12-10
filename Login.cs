@@ -9,21 +9,22 @@ namespace Game_WFDemo_1202
         {
             InitializeComponent();
         }
-
+            
         private void loginButton_Click(object sender, EventArgs e)
         {
             string username = usernameTextBox.Text.Trim();
             string password = passwordTextBox.Text;
-
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+
             {
                 MessageBox.Show("Please enter both username and password.");
                 return;
             }
 
-            if (creatorRadio.Checked)
+            bool isCreator = creatorRadio.Checked;
+            if (UserCredentials.ValidateCredentials(username, password, isCreator))
             {
-                if (username == "admin" && password == "admin123")
+                if (isCreator)
                 {
                     Creator creator = new Creator();
                     creator.FormClosed += (s, args) => this.Show();
@@ -32,12 +33,6 @@ namespace Game_WFDemo_1202
                 }
                 else
                 {
-                    MessageBox.Show("Invalid creator credentials!");
-                }
-            }
-            else
-            {
-                if (username == "duongnguyen" && password == "duong123")
                     if (GameData.QuestionBank.Count != 0)
                     {
                         Player player = new Player();
@@ -49,10 +44,11 @@ namespace Game_WFDemo_1202
                     {
                         MessageBox.Show("No questions available. Please add questions first.");
                     }
-                else
-                {
-                    MessageBox.Show("Invalid player credentials!");
                 }
+            }
+            else
+            {
+                MessageBox.Show($"Invalid {(isCreator ? "creator" : "player")} credentials!");
             }
         }
     }
